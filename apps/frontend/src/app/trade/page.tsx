@@ -36,7 +36,7 @@ export default function TradePage() {
   useEffect(() => {
     if (!token) return;
 
-    api("/api/trading/orders", "GET", null, token)
+    api("api/trading/orders", "GET", null, token)
       .then(setOrders)
       .catch(console.error);
 
