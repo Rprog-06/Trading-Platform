@@ -5,8 +5,8 @@ import express from "express";
 import WebSocket, { WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
 import { redis } from "./redis";
-const app = express();
-const server = http.createServer(app);
+
+const server = http.createServer();
 const wss = new WebSocketServer({ server });
 
 const PORT = Number(process.env.PORT) || 5000;
@@ -17,6 +17,10 @@ const PORT = Number(process.env.PORT) || 5000;
 console.log(`WebSocket server running on port ${PORT}`);
 
 const clients = new Map<string, WebSocket>(); // userId → socket
+server.listen(PORT,() => {
+  console.log(`WebSocket server running on port ${PORT}`);
+});
+  
 
 wss.on("connection", (ws, req) => {
   try {
