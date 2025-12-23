@@ -12,7 +12,7 @@ export default function LoginPage() {
     try{
       setError(null);
     
-    const res = await api("/auth/login", "POST", { email, password });
+    const res = await api("auth/login", "POST", { email, password });
     sessionStorage.setItem("token", res.token);
     window.location.href = "/trade";
   } catch (err: any) {
