@@ -14,8 +14,8 @@ export const api = async (
     },
     body: body ? JSON.stringify(body) : undefined
   });
-  const data = await res.json().catch(() => null);
+  const data = await res.json();
 
   if (!res.ok) throw new Error(data.message || "Something went wrong");
-  return res.json();
+  return data;
 };
