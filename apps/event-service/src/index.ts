@@ -1,14 +1,18 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+import http from "http";
+import express from "express";
 import WebSocket, { WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
 import { redis } from "./redis";
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 
 const PORT = Number(process.env.PORT) || 5000;
 
 // ✅ WebSocket server binds the port ONCE
-const wss = new WebSocketServer({ port: PORT });
+
 
 console.log(`WebSocket server running on port ${PORT}`);
 
