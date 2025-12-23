@@ -7,7 +7,8 @@ import tradingRoutes from "./routes/trading";
 const app = express();
 
 app.use(cors({
-     origin: "http://localhost:3000",
+  origin:[  "http://localhost:3000",
+     "https://trading-platform-frontend-sigma.vercel.app"],
     credentials: true,
 }));
 app.use(express.json());
