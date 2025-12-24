@@ -1,13 +1,13 @@
-import { redis } from "./redis";
+import { subRedis, pubRedis } from "./redis";
 import { placeMarketOrder } from "./binance";
 import { PrismaClient } from "@prisma/client";
 import { decrypt } from "./encryption";
 
 const prisma = new PrismaClient();
 
-redis.subscribe("commands:order:submit");
+subRedis.subscribe("commands:order:submit");
 
-redis.on("message", async (_, message) => {
+subRedis.on("message", async (_, message) => {
    console.log("📥 Execution received command:", message);
   const command = JSON.parse(message);
   
@@ -29,7 +29,7 @@ redis.on("message", async (_, message) => {
       command.quantity
     );
 
-    await redis.publish(
+    await pubRedis.publish(
       "events:order:status",
       JSON.stringify({
         orderId: command.orderId,
@@ -42,7 +42,7 @@ redis.on("message", async (_, message) => {
       })
     );
   } catch (err) {
-    await redis.publish(
+    await pubRedis.publish(
       "events:order:status",
       JSON.stringify({
         orderId: command.orderId,

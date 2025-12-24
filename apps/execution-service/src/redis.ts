@@ -1,13 +1,12 @@
 import Redis from "ioredis";
 
-export const redis = new Redis(process.env.REDIS_URL!);
-export const redisSub = new Redis(process.env.REDIS_URL!);
+export const subRedis = new Redis(process.env.REDIS_URL!);
+export const pubRedis = new Redis(process.env.REDIS_URL!);
 
-redisSub.subscribe("events:order:status");
-redis.on("connect", () => {
-  console.log("Redis connected (Execution Service)");
+subRedis.on("connect", () => {
+  console.log("Redis connected (subscriber)");
 });
-redisSub.on("message", (_, message) => {
-  // handle message
+
+pubRedis.on("connect", () => {
+  console.log("Redis connected (publisher)");
 });
-redis.on("error", console.error);
