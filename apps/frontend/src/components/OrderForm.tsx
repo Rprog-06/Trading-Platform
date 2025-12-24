@@ -15,7 +15,7 @@ type OrderFormProps = {
   token: string;
   onOrderPlaced: (order: Order) => void;
 };
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
   const [side, setSide] = useState<"BUY" | "SELL">("BUY");
   const [type, setType] = useState<"MARKET" | "LIMIT">("MARKET");
@@ -23,7 +23,7 @@ export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
   const [price, setPrice] = useState<number | "">("");
 
   const placeOrder = async () => {
-  const res = await fetch("http://localhost:4000/api/trading/orders", {
+  const res = await fetch(`${API_URL}/api/trading/order}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
