@@ -23,11 +23,13 @@ export default function LoginPage() {
     <div className="flex h-screen items-center justify-center">
       <div className="w-80 space-y-4">
         <h1 className="text-2xl font-bold">Login</h1>
+        <label>Email</label>
         <input
           className="border p-2 w-full"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
+        <label>Password</label>
         <input
           className="border p-2 w-full"
           type="password"
@@ -39,6 +41,7 @@ export default function LoginPage() {
         <button className="bg-blue-600 text-white p-2 w-full" onClick={login}>
           Login
         </button>
+       Don't have an account? <a href="/register">Register</a>
       </div>
     </div>
   );

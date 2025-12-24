@@ -1,7 +1,8 @@
-import app from "./app";
+
 import { loadEnv } from "./config/env";
 
 loadEnv();
+import app from "./app";
 
 const PORT = process.env.PORT || 4000;
 
