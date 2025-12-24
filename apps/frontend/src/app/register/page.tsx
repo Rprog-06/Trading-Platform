@@ -15,7 +15,7 @@ export default function RegisterPage() {
 
   async function register() {
     try {
-      await api("/auth/register", "POST", form);
+      await api("auth/register", "POST", form);
       alert("Registered successfully");
       router.push("/login");
     } catch (e: any) {
