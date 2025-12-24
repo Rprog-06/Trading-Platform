@@ -23,7 +23,7 @@ export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
   const [price, setPrice] = useState<number | "">("");
 
   const placeOrder = async () => {
-  const res = await fetch(`${API_URL}/api/trading/order}`, {
+  const res = await fetch(`${API_URL}api/trading/order}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
