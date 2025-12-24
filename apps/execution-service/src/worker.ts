@@ -28,7 +28,7 @@ subRedis.on("message", async (_, message) => {
       command.side,
       command.quantity
     );
-    if(command.type === "MARKET") {
+  
           
     await pubRedis.publish(
       "events:order:status",
@@ -44,25 +44,9 @@ subRedis.on("message", async (_, message) => {
         timestamp: new Date().toISOString()
       })
     );
-    }
-    else if(command.type === "LIMIT") {
-        await new Promise((res) => setTimeout(res, 2000));
-         await pubRedis.publish(
-      "events:order:status",
-      JSON.stringify({
-        orderId: command.orderId,
-        userId: command.userId,
-        status: "FILLED",
-        symbol: command.symbol,
-        side: command.side,
-        type: command.type,
-        price: command.price,
-        quantity: command.quantity,
-        timestamp: new Date().toISOString()
-      })
-    );
     
-    }
+    
+    
   } catch (err) {
     await pubRedis.publish(
       "events:order:status",
