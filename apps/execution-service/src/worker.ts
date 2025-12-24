@@ -36,6 +36,8 @@ subRedis.on("message", async (_, message) => {
         userId: command.userId,
         status: "FILLED",
         symbol: command.symbol,
+        side: command.side,
+        type: command.type,
         price: result.fills?.[0]?.price,
         quantity: command.quantity,
         timestamp: new Date().toISOString()
