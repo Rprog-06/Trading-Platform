@@ -5,7 +5,9 @@ import { decrypt } from "./encryption";
 
 const prisma = new PrismaClient();
 
+await 
 subRedis.subscribe("commands:order:submit");
+console.log("✅ Execution service ready to process orders");
 
 subRedis.on("message", async (_, message) => {
    console.log("📥 Execution received command:", message);
@@ -39,7 +41,7 @@ subRedis.on("message", async (_, message) => {
         symbol: command.symbol,
         side: command.side,
         type: command.type,
-        price: result.fills?.[0]?.price,
+        price: result.fills?.[0]?.price ?? null,
         quantity: command.quantity,
         timestamp: new Date().toISOString()
       })
