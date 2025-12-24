@@ -18,6 +18,7 @@ router.post("/orders", authenticate, async (req: AuthRequest, res) => {
   if (!parsed.success) {
     return res.status(400).json(parsed.error);
   }
+  
 
 
   const orderId = uuidv4();
@@ -35,6 +36,7 @@ router.post("/orders", authenticate, async (req: AuthRequest, res) => {
     if(!req.userId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
+ 
   await prisma.orderCommand.create({
   data: {
      orderId,
