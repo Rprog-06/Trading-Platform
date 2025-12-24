@@ -23,7 +23,7 @@ export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
   const [price, setPrice] = useState<number | "">("");
 
   const placeOrder = async () => {
-  const res = await fetch (`${API_URL}api/trading/order`, {
+  const res = await fetch (`${API_URL}api/trading/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,10 @@ export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
       quantity,
     }),
   });
-
+  if(!res.ok) {
+    const text= await res.text();
+    throw new Error (text || "Failed to place order");
+  }
   const data = await res.json();
 
   onOrderPlaced({
