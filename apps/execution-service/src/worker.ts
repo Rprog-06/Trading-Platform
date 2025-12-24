@@ -3,6 +3,7 @@ import { placeMarketOrder } from "./binance";
 import { PrismaClient } from "@prisma/client";
 import { decrypt } from "./encryption";
 
+
 const prisma = new PrismaClient();
 
 

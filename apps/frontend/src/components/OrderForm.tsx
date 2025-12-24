@@ -32,9 +32,9 @@ export default function OrderForm({ token,onOrderPlaced, }:OrderFormProps ) {
     body: JSON.stringify({
       symbol: "BTCUSDT",
       side,
-      type: "MARKET",
+      type:"MARKET",
 
-      quantity:quantity.toFixed(6),
+      quantity:Number(quantity),
     }),
   });
   if(!res.ok) {
