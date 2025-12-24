@@ -22,6 +22,7 @@ subRedis.on("message", async (_, message) => {
 
     const apiKey = decrypt(user!.binanceApiKeyEnc);
     const secret = decrypt(user!.binanceSecretEnc);
+   
      await new Promise((res) => setTimeout(res, 2000));
 
     const result = await placeMarketOrder(
@@ -31,7 +32,9 @@ subRedis.on("message", async (_, message) => {
       command.side,
       command.quantity
     );
-  
+   const executedPrice =
+  result.fills?.[0]?.price ||
+  (Number(result.cummulativeQuoteQty) / Number(result.executedQty));
           
     await pubRedis.publish(
       "events:order:status",
@@ -42,7 +45,7 @@ subRedis.on("message", async (_, message) => {
         symbol: command.symbol,
         side: command.side,
         type: command.type,
-        price: result.fills?.[0]?.price ?? null,
+        price: executedPrice,
         quantity: command.quantity,
         timestamp: new Date().toISOString()
       })
