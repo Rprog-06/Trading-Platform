@@ -40,7 +40,7 @@ export default function TradePage() {
       .then(setOrders)
       .catch(console.error);
 
-    connectWS(token, (msg) => {
+    connectWS(token, (msg) => {           //added api
       if (msg.type === "ORDER_UPDATE") {
         setOrders((prev) =>
           prev.map((o) =>
