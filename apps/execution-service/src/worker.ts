@@ -5,7 +5,7 @@ import { decrypt } from "./encryption";
 
 const prisma = new PrismaClient();
 
-await 
+
 subRedis.subscribe("commands:order:submit");
 console.log("✅ Execution service ready to process orders");
 
